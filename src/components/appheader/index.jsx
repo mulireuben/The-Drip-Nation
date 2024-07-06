@@ -1,6 +1,8 @@
-import { HomeFilled } from '@ant-design/icons';
-import { Menu } from 'antd';
+import { HomeFilled, ShoppingCartOutlined } from '@ant-design/icons';
+import { Badge, Drawer, InputNumber, Menu, Table, Typography } from 'antd';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { getCart } from '../../API';
 
 // const Items = (
 //   <Menu
@@ -65,6 +67,65 @@ import { useNavigate } from 'react-router-dom';
 
 const Appheader = () => {
   const navigate = useNavigate();
+  const [cartDrawerOpen, setCartDrawerOpen] = useState(false);
+  const [cartItems, setCartItems] = useState();
+
+  useEffect(() => {
+    getCart().then((res) => {
+      setCartItems(res.products);
+    });
+  }, []);
+
+  function AppCart() {
+    return (
+      <div>
+        <Badge
+          onClick={() => setCartDrawerOpen(true)}
+          count={7}
+          className='shoppingCartOutlined'
+        >
+          <ShoppingCartOutlined />
+        </Badge>
+        <Drawer
+          open={cartDrawerOpen}
+          onClose={() => setCartDrawerOpen(false)}
+          title='Your cart '
+          contentWrapperStyle={{ width: 500 }}
+        >
+          <Table
+            columns={[
+              {
+                title: 'Title',
+                dataIndex: 'title',
+              },
+              {
+                title: 'Price',
+                dataIndex: 'price',
+                render: (value) => {
+                  return <span>${value}</span>;
+                },
+              },
+              {
+                title: 'Quantity',
+                dataIndex: 'quantity',
+                render: (value) => {
+                  return <InputNumber defaultValue={value}></InputNumber>;
+                },
+              },
+              {
+                title: 'Total',
+                dataIndex: 'total',
+                render: (value) => {
+                  return <span>${value}</span>;
+                },
+              },
+            ]}
+            dataSource={cartItems}
+          />
+        </Drawer>
+      </div>
+    );
+  }
 
   const menuClick = (item) => {
     navigate(`/${item.key}`);
@@ -100,7 +161,7 @@ const Appheader = () => {
           },
           {
             label: 'Women',
-            key: 'womens',
+            key: 'women',
             children: [
               {
                 label: 'Women Dresses',
@@ -130,6 +191,8 @@ const Appheader = () => {
           },
         ]}
       ></Menu>
+      <Typography.Title>The Drip Nation</Typography.Title>
+      <AppCart />
     </div>
   );
 };

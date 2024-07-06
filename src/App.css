@@ -7,6 +7,14 @@
 
 .appheader {
   height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.shoppingCartOutlined {
+  margin-right: 8px;
+  font-size: 30px;
+  cursor: pointer;
 }
 
 .appcontent {

@@ -10,6 +10,7 @@ import {
   List,
   message,
   Rate,
+  Spin,
   Typography,
 } from 'antd';
 
@@ -19,15 +20,19 @@ function Products() {
   const [loading, setLoading] = useState([false]);
 
   useEffect(() => {
+    setLoading(true);
     (param.categoryId
       ? getProductsByCategory(param.categoryId)
       : getAllProducts()
     ).then((res) => {
       setItems(res.products);
       // console.log(res.products);
+      setLoading(false);
     });
   }, [param]);
-
+  if (loading) {
+    return <Spin />;
+  }
   function addToCartButton(item) {
     const addProductToCart = () => {
       setLoading(true);
