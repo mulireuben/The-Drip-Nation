@@ -10,6 +10,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-shadow: 1px 4px 4px #00000033;
 }
 .shoppingCartOutlined {
   margin-right: 8px;
@@ -21,11 +22,15 @@
   display: flex;
   flex: 1;
   overflow-y: auto;
+  margin-top: 2px;
 }
 
 .appfooter {
   height: 60px;
   background-color: black;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 }
 .itemCardImage {
   height: 150px !important;
