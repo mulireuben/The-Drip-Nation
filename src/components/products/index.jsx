@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-key */
 import { useEffect, useState } from 'react';
-import { getAllProducts, addToCart } from '../../API';
+import { useParams } from 'react-router-dom';
+import { addToCart, getAllProducts, getProductsByCategory } from '../../API';
 import {
   Badge,
   Button,
@@ -13,17 +14,23 @@ import {
 } from 'antd';
 
 function Products() {
+  const param = useParams();
   const [items, setItems] = useState([]);
+  const [loading, setLoading] = useState([false]);
 
   useEffect(() => {
-    getAllProducts().then((res) => {
+    (param.categoryId
+      ? getProductsByCategory(param.categoryId)
+      : getAllProducts()
+    ).then((res) => {
       setItems(res.products);
       // console.log(res.products);
     });
-  }, []);
+  }, [param]);
 
   function addToCartButton(item) {
     const addProductToCart = () => {
+      setLoading(true);
       addToCart(item.id)
         .then((resp) => {
           if (resp && resp.success) {
@@ -35,10 +42,11 @@ function Products() {
         .catch((error) => {
           message.error(`Error: ${error.message}`);
         });
+      setLoading(false);
     };
 
     return (
-      <Button type='primary' onClick={addProductToCart}>
+      <Button type='primary' onClick={addProductToCart} loading={loading}>
         Add to Cart
       </Button>
     );

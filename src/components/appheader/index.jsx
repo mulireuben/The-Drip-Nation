@@ -68,6 +68,7 @@ const Appheader = () => {
 
   const menuClick = (item) => {
     navigate(`/${item.key}`);
+    console.log(item.key);
   };
   return (
     <div className='appheader'>
@@ -85,41 +86,41 @@ const Appheader = () => {
             children: [
               {
                 label: 'Men Shirts',
-                key: 'men_shirts',
+                key: 'mens-shirts',
               },
               {
                 label: 'Men Shoes',
-                key: 'men_shoes',
+                key: 'mens-shoes',
               },
               {
                 label: 'Men Watches',
-                key: 'men_watches',
+                key: 'mens-watches',
               },
             ],
           },
           {
             label: 'Women',
-            key: 'women',
+            key: 'womens',
             children: [
               {
                 label: 'Women Dresses',
-                key: 'women_dresses',
+                key: 'womens-dresses',
               },
               {
                 label: 'Women Shoes',
-                key: 'women_shoes',
+                key: 'womens-shoes',
               },
               {
                 label: 'Women Watches',
-                key: 'women_watches',
+                key: 'womens-watches',
               },
               {
                 label: 'Women Bags',
-                key: 'women_bags',
+                key: 'womens-bags',
               },
               {
                 label: 'Women jewellary',
-                key: 'women_jewelary',
+                key: 'womens-jewelary',
               },
             ],
           },

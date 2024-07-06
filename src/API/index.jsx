@@ -1,12 +1,19 @@
 export async function getAllProducts() {
-  return await fetch('https://dummyjson.com/products')
-    .then((res) => res.json())
-    .then((error) => {
-      console.log(error);
-    });
+  return await fetch('https://dummyjson.com/products').then((res) =>
+    res.json()
+  );
+  // .then((error) => {
+  //   console.log(error);
+  // });
 }
 
-export async function addToCart(itemid) {
+export const getProductsByCategory = (category) => {
+  return fetch(`https://dummyjson.com/products/category/${category}`).then(
+    (res) => res.json()
+  );
+};
+
+export async function addToCart(id) {
   return await fetch('https://dummyjson.com/carts/add', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -14,7 +21,7 @@ export async function addToCart(itemid) {
       userId: 1,
       products: [
         {
-          id: itemid,
+          id: id,
           quantity: 1,
         },
       ],
