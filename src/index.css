@@ -1,0 +1,24 @@
+/* .app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+}
+
+.appheader {
+  height: 100px;
+}
+.appcontent {
+  display: flex;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.appfooter {
+  height: 60px;
+  background-color: black;
+}
+.itemCardImage {
+  height: 150px !important;
+  object-fit: scale-down;
+} */
